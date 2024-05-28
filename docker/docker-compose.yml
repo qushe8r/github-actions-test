@@ -82,7 +82,7 @@ services:
       - "6379:6379"
 
   backend:
-    image: "qushe8r/github-actions-test:0.0.3"
+    image: "qushe8r/github-actions-test:0.0.4"
     ports:
       - "8080:8080"
     restart: always
