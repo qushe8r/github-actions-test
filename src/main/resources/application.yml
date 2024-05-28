@@ -1,0 +1,37 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: github-actions-test-application
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  datasource:
+    url: jdbc:postgresql://localhost:5432/github-actions
+    username: postgresql
+    password: postgresql
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+
+cloud:
+  aws:
+    credentials:
+      access-key: minioadmin
+      secret-key: minioadmin
+    s3:
+      endpoint: http://localhost:9000
+      bucket: github-actions-test
+    region:
+      static: ap-northeast-2
+
+#logging:
+#  level:
+#    org.springframework: DEBUG
+#    log.qushe8r: DEBUG
+
