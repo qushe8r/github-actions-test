@@ -45,7 +45,7 @@ tasks.named('test') {
 docker {
     println(tasks.bootJar.outputs.files)
     name project.getProperties()["dUsername"] + "/" + project.name + ":" + version
-    dockerfile file('./docker/Dockerfile')
+    dockerfile file('./docker/dockerfile')
     files tasks.bootJar.outputs.files
     buildArgs(['JAR_FILE': tasks.bootJar.outputs.files.singleFile.name])
     push true
