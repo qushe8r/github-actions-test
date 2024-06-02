@@ -1,4 +1,4 @@
-### [docker 설치하기](https://github.com/docker/docker-install)
+### docker 설치하기[링크](https://github.com/docker/docker-install)
 ```shell
 curl -fsSL https://get.docker.com -o get-docker.sh
 sh get-docker.sh
@@ -26,7 +26,7 @@ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 docker-compose --version
 ```
 
-
+### 로컬에서 실행하기
 1. docker login 하기
 ```shell
 docker login
