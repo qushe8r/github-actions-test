@@ -42,11 +42,38 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
+//docker {
+//    println(tasks.bootJar.outputs.files)
+//    name project.getProperties()["dUsername"] + "/" + project.name + ":" + version
+//    dockerfile file('./docker/dockerfile')
+//    files tasks.bootJar.outputs.files
+//    buildArgs(['JAR_FILE': tasks.bootJar.outputs.files.singleFile.name])
+//}
+
 docker {
-    println(tasks.bootJar.outputs.files)
-    name project.getProperties()["dUsername"] + "/" + project.name + ":" + version
+    // test 주석 처리 해제하면 테스트 실행합니다.
+    // dependsOn check
+
+    // start
+    println "task: docker start, jar file:${tasks.bootJar.outputs.files.singleFile.name}"
+
+    // ./gradlew dockerPush -PdUsername=dockerUsername 으로 입력받은 dockerUsername
+    def dockerUsername = project.getProperties()["dUsername"]
+
+    if (dockerUsername) {
+        // dUsername을 입력하면 -> {{dUsername}}/nail-case:0.0.1-SNAPSHOT 형태로 이미지 생성됩니다.
+        // 항상 이미지 버전 명시하지 않고 최신버전은 latest로 당겨올 수 있습니다.
+        println "if"
+        name "${dockerUsername}/${project.name}:${version}"
+        tag dockerUsername as String, "${dockerUsername}/${project.name}:latest"
+    } else {
+        // dUsername을 입력하지 않으면 로컬 이미지가 생성됩니다.
+        println "else"
+        name "${project.name}:${version}"
+    }
+
+    // dockerfile 위치, dockerfile ARG
     dockerfile file('./docker/dockerfile')
     files tasks.bootJar.outputs.files
     buildArgs(['JAR_FILE': tasks.bootJar.outputs.files.singleFile.name])
-    push true
 }
